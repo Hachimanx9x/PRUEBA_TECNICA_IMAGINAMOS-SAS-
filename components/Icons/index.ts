@@ -20,6 +20,7 @@ import ArrowSimpleRigth from "./ArrowSimpleRigth";
 import Car from "./Car";
 import Plus from "./Plus";
 import Minus from "./Minus";
+import EmojiSad from "./EmojiSad";
 export {
   ArrorRigth,
   ArrorDown,
@@ -30,6 +31,7 @@ export {
   Asia,
   Gourmet,
   Clock,
+  EmojiSad,
   Car,
   Hamburger,
   HamburgerColor,

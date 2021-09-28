@@ -6,7 +6,4 @@ export type AddPropsProduct = {
   image: string;
   amount: number;
 };
-
-export type AddPropsProducts = {
-  products?: AddPropsProduct[];
-};
+export type AddPropsProducts = AddPropsProduct[];

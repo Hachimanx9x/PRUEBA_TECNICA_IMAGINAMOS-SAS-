@@ -8,39 +8,18 @@ import { colors } from "../../styles/colors";
 import { Clock } from "../Icons";
 //components
 import Products from "./Products";
-
+//redux
+import { useAppSelector } from "../../redux";
 //styled-components
 const CustomCardInfo = styled.div`
   background-color: ${colors.backgroundBlue};
 `;
 
 export default function InfoOrder() {
-  const arrayProducts: AddPropsProduct[] = [
-    {
-      name: "Hamburguesa",
-      qualification: 4.6,
-      amount: 1,
-      price: 14.99,
-      image:
-        "https://images.pexels.com/photos/156114/pexels-photo-156114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=226&w=440",
-    },
-    {
-      name: "Hamburguesa",
-      qualification: 4.6,
-      amount: 1,
-      price: 14.99,
-      image:
-        "https://images.pexels.com/photos/156114/pexels-photo-156114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=226&w=440",
-    },
-    {
-      name: "Hamburguesa",
-      qualification: 4.6,
-      amount: 1,
-      price: 14.99,
-      image:
-        "https://images.pexels.com/photos/156114/pexels-photo-156114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=226&w=440",
-    },
-  ];
+  const products = useAppSelector(
+    (state) => state.shoppingList.setShoopingList
+  );
+
   return (
     <div className="lg:mt-12 w-full flex flex-col items-center justify-between">
       <div className="lg:w-64">
@@ -77,7 +56,7 @@ export default function InfoOrder() {
 
         {/*Products List */}
         <div className="mt-2 w-full lg:h-full flex flex-col justify-between">
-          <Products products={arrayProducts} />
+          <Products products={products} />
         </div>
       </div>
     </div>

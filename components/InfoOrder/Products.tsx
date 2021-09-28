@@ -32,20 +32,22 @@ export default function Products(props: AddPropsProducts) {
   // console.log(products);
   return (
     <CustomContainer className="w-full ">
-      {products.map((ele, id) => (
-        <div
-          key={id}
-          className="mt-8 flex flex-row items-center justify-between"
-        >
-          <CustomCardImage img={ele.image} />
-          <div className="font-semibold flex flex-row items-center">
-            {ele.amount} x{" "}
-            <CustomTextDiv className="ml-1 ">{ele.name}</CustomTextDiv>
-          </div>
+      {products && products.length > 0
+        ? products.map((ele, id) => (
+            <div
+              key={id}
+              className="mt-8 flex flex-row items-center justify-between"
+            >
+              <CustomCardImage img={ele.image} />
+              <div className="font-semibold flex flex-row items-center">
+                {ele.amount} x{" "}
+                <CustomTextDiv className="ml-1 ">{ele.name}</CustomTextDiv>
+              </div>
 
-          <div className="text-gray-500">${ele.price}</div>
-        </div>
-      ))}
+              <div className="text-gray-500">${ele.price}</div>
+            </div>
+          ))
+        : ""}
 
       <div className="mt-8 flex flex-row items-center justify-between">
         <CustomCardIcons className="bg-yellow-300 bg-opacity-25 p-1">
@@ -59,3 +61,17 @@ export default function Products(props: AddPropsProducts) {
     </CustomContainer>
   );
 }
+/**products.map((ele, id) => (
+          <div
+            key={id}
+            className="mt-8 flex flex-row items-center justify-between"
+          >
+            <CustomCardImage img={ele.image} />
+            <div className="font-semibold flex flex-row items-center">
+              {ele.amount} x{" "}
+              <CustomTextDiv className="ml-1 ">{ele.name}</CustomTextDiv>
+            </div>
+  
+            <div className="text-gray-500">${ele.price}</div>
+          </div>
+        ))  */

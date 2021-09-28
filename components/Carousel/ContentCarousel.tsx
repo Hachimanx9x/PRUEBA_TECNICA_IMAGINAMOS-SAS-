@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { colors } from "../../styles/colors";
-//import CardCategorie from "./CardCategories";
+
 import { addPropsCarousel } from "./typeProps";
 import { ArrowSimpleRigth, ArrowLeft } from "../Icons";
 
@@ -21,11 +20,54 @@ const Container = styled.div`
   }
 `;
 
+const ConatinerCarousel = styled.div<{
+  animation: boolean;
+  transitionTime: number;
+  movXPre: number;
+  movX: number;
+}>`
+  ${(props) =>
+    props.animation
+      ? "animation: movel " + props.transitionTime + "s linear normal; "
+      : "transform:translateX(" + props.movX + "px);"}
+
+  @keyframes movel {
+    0% {
+      transform: translateX(${(props) => props.movXPre}px);
+    }
+    100% {
+      transform: translateX(${(props) => props.movX}px);
+    }
+  }
+`;
+
 const CustoButton = styled.button<{ displayCustom: boolean }>`
   background-color: #f8f8f8;
   display: ${(props) => (props.displayCustom ? "contents" : "none")};
 `;
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height,
+  };
+}
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = React.useState(
+    getWindowDimensions()
+  );
 
+  React.useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowDimensions;
+}
 export default function ContentCarousel({
   children,
   numItems,
@@ -41,30 +83,20 @@ export default function ContentCarousel({
   const [maxContent, setMaxmaxContent] = React.useState(0);
   const [displayRigth, setDisplayRigth] = React.useState(true);
   const [displayLeft, setDisplayLeft] = React.useState(true);
-
+  const { width } = useWindowDimensions();
   React.useEffect(() => {
-    const width = refElements.current ? refElements.current.offsetWidth : 0;
+    setMovXPre(0);
+    setMovX(0);
+    setAnimation(false);
+
+    const widthE = refElements.current ? refElements.current.offsetWidth : 0;
     setMaxmaxContent(refContent.current ? refContent.current.offsetWidth : 0);
-    setFractionWidth(width / numItems);
-    setMaxX(width);
-    // const newmove = movX - fractionWitdth;
-    //  console.log(newmove);
-    // console.log(maxContent - max);
-    // console.log(newmove > maxContent - max);
-    /*  if (newmove >= maxContent - max) {
-      setDisplayRigth(true);
-    }
-    if (movX < 1) {
-      setDisplayLeft(true);
-    }*/
-  }, [refElements.current]);
+    setFractionWidth(widthE / numItems);
+    setMaxX(widthE);
+  }, [refElements.current, refContent.current, children, numItems, width]);
 
   const next = () => {
     const newmove = movX - fractionWitdth;
-    console.log(newmove);
-
-    console.log(maxContent);
-    console.log(max);
     if (movX < 1 && movX >= maxContent - max) {
       setAnimation(true);
       setTimeout(() => {
@@ -77,7 +109,6 @@ export default function ContentCarousel({
     const future = newmove - fractionWitdth;
 
     if (future <= maxContent - max) {
-      //  setDisplayRigth(false);
     }
 
     if (future !== 0) {
@@ -105,22 +136,6 @@ export default function ContentCarousel({
     }
   };
 
-  //components
-
-  const ConatinerCarousel = styled.div`
-    ${animation
-      ? "animation: movel " + transitionTime + "s linear normal; "
-      : "transform:translateX(" + movX + "px);"}
-
-    @keyframes movel {
-      0% {
-        transform: translateX(${movXPre}px);
-      }
-      100% {
-        transform: translateX(${movX}px);
-      }
-    }
-  `;
   return (
     <div className="w-full">
       <Container
@@ -143,6 +158,10 @@ export default function ContentCarousel({
           </div>
         </div>
         <ConatinerCarousel
+          animation={animation}
+          transitionTime={transitionTime}
+          movX={movX}
+          movXPre={movXPre}
           ref={refElements}
           className="flex flex-row  items-center"
         >
@@ -152,8 +171,3 @@ export default function ContentCarousel({
     </div>
   );
 }
-/**
- {categories.map((ele) => (
-            <CardCategorie key={ele.id} name={ele.name} icon={ele.icon} />
-          ))}
- */

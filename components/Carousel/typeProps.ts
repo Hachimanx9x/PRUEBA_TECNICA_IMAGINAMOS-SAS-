@@ -1,15 +1,17 @@
 import { type } from "os";
 import React from "react";
+type product = {
+  id: number;
+  name: string;
+  qualification: number;
+  time: string;
+  price: number;
+  image: string;
+};
+
 export type AddPropsCategories = {
   categories: { id: number; name: string; icon: string }[];
-  products: {
-    id: number;
-    name: string;
-    qualification: number;
-    time: string;
-    price: number;
-    image: string;
-  }[];
+  products: product[] | [];
 };
 
 export type addPropsOptions = {
@@ -19,6 +21,7 @@ export type addPropsOptions = {
 export type addPropsCardCategories = {
   name: string;
   icon: string;
+  active: boolean;
 };
 
 export type addPropsCarousel = {
