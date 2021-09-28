@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { AddPropsProduct } from "./types";
+
 //imgs
 import imagEmogi from "../../assets/images/emoji.png";
 import { colors } from "../../styles/colors";

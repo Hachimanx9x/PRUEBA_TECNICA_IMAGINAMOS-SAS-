@@ -1,5 +1,6 @@
+import dynamic from "next/dynamic";
 import React from "react";
-import ContentCarousel from "./ContentCarousel";
+
 import NavBarCarousel from "./NavBarCarousel";
 import CardCategorie from "./CardCategories";
 import CardProduct from "./CardProduct";
@@ -7,6 +8,10 @@ import { AddPropsCategories } from "./typeProps";
 import { EmojiSad } from "../Icons";
 //redux
 import { useAppSelector } from "../../redux";
+
+const ContentCarousel = dynamic(() => import("./ContentCarousel"), {
+  ssr: false,
+});
 const optionsDelivery = [0, 1, 2, 3];
 
 export default function Carousel({ categories, products }: AddPropsCategories) {

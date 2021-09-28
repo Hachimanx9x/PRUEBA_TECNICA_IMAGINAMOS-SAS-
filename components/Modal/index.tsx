@@ -27,10 +27,6 @@ export default function Modal({ active, activeModal }: Props): ReactElement {
   const dispatch = useAppDispatch();
   const onClickauthGoogle = () => {
     dispatch(authUserMethods.authUser());
-    //  dispatch(userActions.deleteName);
-    /*  authGoogle().then((result) => {
-      console.log(result.user.displayName);
-    });*/
   };
   const name = useAppSelector((state) => state.authUser.displayName);
   React.useEffect(() => {

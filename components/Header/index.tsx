@@ -32,22 +32,14 @@ const TitleHeader = styled.h1`
 const SubTitleHeader = styled.h5`
   color: rgba(0, 0, 0, 0.5);
 `;
-/*
-const ArrowRigth = styled.div`
-  width: 25px;
-  height: 25px;
-  -webkit-mask: url(${icon_RowR});
-  mask: url(${icon_RowR});
-  mask-size: cover;
-  background: red;
-`;*/
+
 export default function Header() {
   return (
     <div className="flex flex-col items-center mt-7 lg:mt-12 w-full">
       <InfoHeader className="flex justify-between items-end py-0 lg:px-11">
         {/*img */}
         <ContainerImg className="w-32  lg:w-64">
-          <Image src={img_Header} />
+          <Image src={img_Header} alt="image Header" />
         </ContainerImg>
 
         {/*text center*/}
@@ -56,7 +48,7 @@ export default function Header() {
             <TitleHeader className="flex font-bold ">
               $0 delivery for 30 days!
               <ContainerImg className="w-6 ml-1 lg:w-8 lg:ml-3">
-                <Image src={img_d} />
+                <Image src={img_d} alt="image emoji" />
               </ContainerImg>
             </TitleHeader>
             <SubTitleHeader className="">
